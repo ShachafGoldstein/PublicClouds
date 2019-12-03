@@ -1,5 +1,9 @@
 ## Snippets
 * **AAD**
+  * Give SP id permission on billing account (ea account)
+    ```
+    az role assignment create --assignee-object-id "SP_ID"  --role "owner" --scope "/providers/Microsoft.Billing/enrollmentAccounts/USER_ID"
+    ```
 * **EA**
   * Get all account owners of subscriptions
     ```
