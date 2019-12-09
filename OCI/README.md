@@ -1,3 +1,13 @@
+## Snippets
+* **General**
+  * Comp hierarchy creation from mgs in AAD - (convention specific)
+    ```
+    $oraclecomps = (oci iam compartment list --all --compartment-id  "TENANT_OCID" | convertfrom-json).data
+    $mgs = ($mgs.Children | %{Get-AzManagementGroup -Recurse -Expand -GroupName $_.name})
+    $mgs.children | % {$aaa = $_; oci iam compartment create --name $aaa.name.split('-')[1] --description "$($aaa.displayname.split('-')[0])-$($aaa.name.split('-')[1])" -c (($oraclecomps | ? {$_.name -eq $aaa.displayname.split('-')[0]}).id)}
+    ```
+
+## Runbooks
 * **OCI-Comp-Create.py**
   * Runbook to create OCI compartments with an owner group with idp mapping and a budget via webhook
   * **Variables**
